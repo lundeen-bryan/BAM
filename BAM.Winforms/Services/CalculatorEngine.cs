@@ -11,6 +11,7 @@ namespace BAM.Winforms.Services
 
         private CalculatorOperation _pendingOperation = CalculatorOperation.None;
 
+        private decimal _lastEntryValue;
         private decimal _pendingValue;
         private decimal _mainLedValue;
         private decimal _memoryLedValue;
@@ -18,6 +19,7 @@ namespace BAM.Winforms.Services
         private decimal _currentInputValue;
         private decimal _lastRepeatValue;
 
+        private bool _hasLastEntryValue;
         private bool _hasPendingOperation;
         private bool _hasCurrentInput;
         private bool _hasLastRepeatValue;
@@ -35,6 +37,18 @@ namespace BAM.Winforms.Services
             _hasCurrentInput = true;
         }
 
+        private void ClearLastEntryValue()
+        {
+            _lastEntryValue = 0m;
+            _hasLastEntryValue = false;
+        }
+
+        private void StoreLastEntryValue(decimal value)
+        {
+            _lastEntryValue = value;
+            _hasLastEntryValue = true;
+        }
+
         public void Add()
         {
             decimal valueToAdd = GetResolvedCommittableValue();
@@ -43,6 +57,7 @@ namespace BAM.Winforms.Services
             _mainLedValue = _runningTotal;
 
             StoreRepeatValue(valueToAdd);
+            StoreLastEntryValue(valueToAdd);
 
             AddTapeEntry(
                 value: valueToAdd,
@@ -62,6 +77,7 @@ namespace BAM.Winforms.Services
             _mainLedValue = _runningTotal;
 
             StoreRepeatValue(valueToSubtract);
+            StoreLastEntryValue(valueToSubtract);
 
             AddTapeEntry(
                 value: valueToSubtract,
@@ -121,6 +137,8 @@ namespace BAM.Winforms.Services
 
             _mainLedValue = result;
 
+            StoreLastEntryValue(result);
+
             AddTapeEntry(
                 value: secondValue,
                 operation: CalculatorOperation.Equals,
@@ -135,6 +153,8 @@ namespace BAM.Winforms.Services
         public void Total()
         {
             _mainLedValue = _runningTotal;
+
+            StoreLastEntryValue(_runningTotal);
 
             AddTapeEntry(
                 value: _runningTotal,
@@ -152,6 +172,8 @@ namespace BAM.Winforms.Services
         public void Subtotal()
         {
             _mainLedValue = _runningTotal;
+
+            StoreLastEntryValue(_runningTotal);
 
             AddTapeEntry(
                 value: _runningTotal,
@@ -186,6 +208,7 @@ namespace BAM.Winforms.Services
             ClearCurrentInput();
             ClearPendingOperation();
             ClearRepeatValue();
+            ClearLastEntryValue();
 
             _tapeEntries.Clear();
 
