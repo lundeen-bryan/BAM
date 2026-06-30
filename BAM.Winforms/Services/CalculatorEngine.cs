@@ -232,27 +232,86 @@ namespace BAM.Winforms.Services
 
         public void MemoryAdd()
         {
-            throw new NotImplementedException("MemoryAdd will be implemented in Phase 4.");
+            decimal valueToStore = GetMemoryCommittableValue();
+
+            _memoryLedValue += valueToStore;
+
+            StoreLastEntryValue(valueToStore);
+
+            AddTapeEntry(
+                value: valueToStore,
+                operation: CalculatorOperation.MemoryAdd,
+                result: _memoryLedValue,
+                runningTotal: _runningTotal,
+                entryType: TapeEntryType.Memory);
+
+            ClearCurrentInput();
         }
 
         public void MemorySubtract()
         {
-            throw new NotImplementedException("MemorySubtract will be implemented in Phase 4.");
+            decimal valueToStore = GetMemoryCommittableValue();
+
+            _memoryLedValue -= valueToStore;
+
+            StoreLastEntryValue(valueToStore);
+
+            AddTapeEntry(
+                value: valueToStore,
+                operation: CalculatorOperation.MemorySubtract,
+                result: _memoryLedValue,
+                runningTotal: _runningTotal,
+                entryType: TapeEntryType.Memory);
+
+            ClearCurrentInput();
         }
 
         public void MemoryRecall()
         {
-            throw new NotImplementedException("MemoryRecall will be implemented in Phase 4.");
+            _mainLedValue = _memoryLedValue;
+
+            AddTapeEntry(
+                value: _memoryLedValue,
+                operation: CalculatorOperation.MemoryRecall,
+                result: _mainLedValue,
+                runningTotal: _runningTotal,
+                entryType: TapeEntryType.Memory);
+
+            ClearCurrentInput();
         }
 
         public void MemorySubtotal()
         {
-            throw new NotImplementedException("MemorySubtotal will be implemented in Phase 4.");
+            _mainLedValue = _memoryLedValue;
+
+            StoreLastEntryValue(_memoryLedValue);
+
+            AddTapeEntry(
+                value: _memoryLedValue,
+                operation: CalculatorOperation.MemorySubtotal,
+                result: _mainLedValue,
+                runningTotal: _runningTotal,
+                entryType: TapeEntryType.Memory);
+
+            ClearCurrentInput();
         }
 
         public void MemoryTotal()
         {
-            throw new NotImplementedException("MemoryTotal will be implemented in Phase 4.");
+            _mainLedValue = _memoryLedValue;
+
+            StoreLastEntryValue(_memoryLedValue);
+
+            AddTapeEntry(
+                value: _memoryLedValue,
+                operation: CalculatorOperation.MemoryTotal,
+                result: _mainLedValue,
+                runningTotal: _runningTotal,
+                entryType: TapeEntryType.Memory);
+
+            _memoryLedValue = 0m;
+
+            ClearCurrentInput();
         }
 
         private decimal GetCommittableValue()
@@ -347,6 +406,19 @@ namespace BAM.Winforms.Services
             _lastRepeatValue = 0m;
             _hasLastRepeatValue = false;
         }
+        private decimal GetMemoryCommittableValue()
+        {
+            if (_hasCurrentInput)
+            {
+                return _currentInputValue;
+            }
 
+            if (_hasLastEntryValue)
+            {
+                return _lastEntryValue;
+            }
+
+            return _mainLedValue;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace BAM.Winforms.Forms
 
         private void WireUpEvents()
         {
-            TestAddButton.Click += TestAddTenButton_Click;
+            //TestAddButton.Click += TestAddTenButton_Click;
         }
 
         private void TestAddTenButton_Click(object sender, EventArgs e)
@@ -30,21 +30,24 @@ namespace BAM.Winforms.Forms
             _engine.SetValue(10m);
             _engine.Add();
 
+            _engine.MemoryAdd();
+            _engine.MemoryAdd();
+
             UpdateDisplay();
         }
 
         private void UpdateDisplay()
         {
-            TestMainLedTextBox.Text = _engine.MainLedValue.ToString("G29");
-            TestMemoryLedTextBox.Text = _engine.MemoryLedValue.ToString("G29");
+            //TestMainLedTextBox.Text = _engine.MainLedValue.ToString("G29");
+            //TestMemoryLedTextBox.Text = _engine.MemoryLedValue.ToString("G29");
 
-            TestTapeListBox.Items.Clear();
+            //TestTapeListBox.Items.Clear();
 
-            foreach (var entry in _engine.TapeEntries)
-            {
-                TestTapeListBox.Items.Add(
-                    $"{entry.Value,10:0.00}  {GetTapeSymbol(entry.Operation)}");
-            }
+            //foreach (var entry in _engine.TapeEntries)
+            //{
+            //    TestTapeListBox.Items.Add(
+            //        $"{entry.Value,10:0.00}  {GetTapeSymbol(entry.Operation)}");
+            //}
         }
 
         private string GetTapeSymbol(CalculatorOperation operation)
@@ -77,6 +80,20 @@ namespace BAM.Winforms.Forms
 
                 case CalculatorOperation.ClearAll:
                     return "ClearAll";
+                case CalculatorOperation.MemoryAdd:
+                    return "M+";
+
+                case CalculatorOperation.MemorySubtract:
+                    return "M-";
+
+                case CalculatorOperation.MemoryRecall:
+                    return "MR";
+
+                case CalculatorOperation.MemorySubtotal:
+                    return "MS";
+
+                case CalculatorOperation.MemoryTotal:
+                    return "MT";
 
                 default:
                     return operation.ToString();
