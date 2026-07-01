@@ -141,21 +141,9 @@ namespace BAM.Winforms.Forms
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_currentInputText))
-            {
-                return;
-            }
-
-            _currentInputText = _currentInputText.Substring(0, _currentInputText.Length - 1);
-
-            if (string.IsNullOrEmpty(_currentInputText))
-            {
-                ResetInputState();
-                UpdateDisplay();
-                return;
-            }
-
-            MainTextBox.Text = _currentInputText;
+            _engine.DeleteLastEntry();
+            ResetInputState();
+            UpdateDisplay();
         }
 
         private void AppendInput(string text)

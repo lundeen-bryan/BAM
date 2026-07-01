@@ -24,6 +24,8 @@ namespace BAM.Winforms.Services
         void Clear();
 
         void ClearAll();
+        
+        void DeleteLastEntry();
 
         void Negate();
 

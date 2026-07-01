@@ -37,6 +37,80 @@ namespace BAM.Winforms.Services
             _hasCurrentInput = true;
         }
 
+        public void DeleteLastEntry()
+        {
+            if (_tapeEntries.Count == 0)
+            {
+                return;
+            }
+
+            var lastEntry = _tapeEntries[_tapeEntries.Count - 1];
+
+            RestoreState(lastEntry.PreviousState);
+
+            _tapeEntries.RemoveAt(_tapeEntries.Count - 1);
+        }
+
+        private void UndoTapeEntry(TapeEntry entry)
+        {
+            switch (entry.Operation)
+            {
+                case CalculatorOperation.Add:
+                    _runningTotal -= entry.Value;
+                    _mainLedValue = _runningTotal;
+                    break;
+
+                case CalculatorOperation.Subtract:
+                    _runningTotal += entry.Value;
+                    _mainLedValue = _runningTotal;
+                    break;
+
+                case CalculatorOperation.MemoryAdd:
+                    _memoryLedValue -= entry.Value;
+                    break;
+
+                case CalculatorOperation.MemorySubtract:
+                    _memoryLedValue += entry.Value;
+                    break;
+
+                case CalculatorOperation.Total:
+                case CalculatorOperation.Subtotal:
+                case CalculatorOperation.Equals:
+                case CalculatorOperation.MemoryRecall:
+                case CalculatorOperation.MemorySubtotal:
+                case CalculatorOperation.MemoryTotal:
+                case CalculatorOperation.Clear:
+                case CalculatorOperation.ClearAll:
+                    // These need deeper state snapshots later.
+                    // For now, remove the tape line only.
+                    break;
+            }
+        }
+
+        private void RebuildLastEntryValue()
+        {
+            for (int i = _tapeEntries.Count - 1; i >= 0; i--)
+            {
+                var entry = _tapeEntries[i];
+
+                if (entry.Operation == CalculatorOperation.Add ||
+                    entry.Operation == CalculatorOperation.Subtract ||
+                    entry.Operation == CalculatorOperation.Total ||
+                    entry.Operation == CalculatorOperation.Subtotal ||
+                    entry.Operation == CalculatorOperation.Equals ||
+                    entry.Operation == CalculatorOperation.MemoryAdd ||
+                    entry.Operation == CalculatorOperation.MemorySubtract ||
+                    entry.Operation == CalculatorOperation.MemorySubtotal ||
+                    entry.Operation == CalculatorOperation.MemoryTotal)
+                {
+                    StoreLastEntryValue(entry.Value);
+                    return;
+                }
+            }
+
+            ClearLastEntryValue();
+        }
+
         private void ClearLastEntryValue()
         {
             _lastEntryValue = 0m;
@@ -51,6 +125,8 @@ namespace BAM.Winforms.Services
 
         public void Add()
         {
+            var previousState = CreateStateSnapshot();
+
             decimal valueToAdd = GetResolvedCommittableValue();
 
             _runningTotal += valueToAdd;
@@ -64,13 +140,16 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Add,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Operation);
+                entryType: TapeEntryType.Operation,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
 
         public void Subtract()
         {
+            var previousState = CreateStateSnapshot();
+
             decimal valueToSubtract = GetResolvedCommittableValue();
 
             _runningTotal -= valueToSubtract;
@@ -84,13 +163,16 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Subtract,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Operation);
+                entryType: TapeEntryType.Operation,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
 
         public void Multiply()
         {
+            var previousState = CreateStateSnapshot();
+
             _pendingValue = GetCommittableValue();
             _pendingOperation = CalculatorOperation.Multiply;
             _hasPendingOperation = true;
@@ -102,13 +184,16 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Multiply,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Operation);
+                entryType: TapeEntryType.Operation,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
 
         public void Divide()
         {
+            var previousState = CreateStateSnapshot();
+
             _pendingValue = GetCommittableValue();
             _pendingOperation = CalculatorOperation.Divide;
             _hasPendingOperation = true;
@@ -120,7 +205,8 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Divide,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Operation);
+                entryType: TapeEntryType.Operation,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
@@ -132,6 +218,9 @@ namespace BAM.Winforms.Services
                 return;
             }
 
+            var previousState = CreateStateSnapshot();
+
+            _pendingValue = GetCommittableValue();
             decimal secondValue = GetCommittableValue();
             decimal result = ResolvePendingOperation(secondValue);
 
@@ -144,7 +233,8 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Equals,
                 result: result,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Result);
+                entryType: TapeEntryType.Result,
+                previousState: previousState);
 
             ClearPendingOperation();
             ClearCurrentInput();
@@ -152,6 +242,8 @@ namespace BAM.Winforms.Services
 
         public void Total()
         {
+            var previousState = CreateStateSnapshot();
+            _pendingValue = GetCommittableValue();
             _mainLedValue = _runningTotal;
 
             StoreLastEntryValue(_runningTotal);
@@ -161,7 +253,8 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Total,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Total);
+                entryType: TapeEntryType.Total,
+                previousState: previousState);
 
             _runningTotal = 0m;
             ClearCurrentInput();
@@ -171,6 +264,9 @@ namespace BAM.Winforms.Services
 
         public void Subtotal()
         {
+            var previousState = CreateStateSnapshot();
+
+            _pendingValue = GetCommittableValue();
             _mainLedValue = _runningTotal;
 
             StoreLastEntryValue(_runningTotal);
@@ -180,13 +276,17 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Subtotal,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Subtotal);
+                entryType: TapeEntryType.Subtotal,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
 
         public void Clear()
         {
+            var previousState = CreateStateSnapshot();
+
+            _pendingValue = GetCommittableValue();
             _mainLedValue = 0m;
             ClearCurrentInput();
             ClearPendingOperation();
@@ -196,12 +296,16 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.Clear,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Clear);
+                entryType: TapeEntryType.Clear,
+                previousState: previousState);
         }
 
         public void ClearAll()
         {
+            var previousState = CreateStateSnapshot();
+
             _mainLedValue = 0m;
+            ClearCurrentInput();
             _memoryLedValue = 0m;
             _runningTotal = 0m;
 
@@ -210,14 +314,13 @@ namespace BAM.Winforms.Services
             ClearRepeatValue();
             ClearLastEntryValue();
 
-            _tapeEntries.Clear();
-
             AddTapeEntry(
-                value: 0m,
-                operation: CalculatorOperation.ClearAll,
-                result: _mainLedValue,
-                runningTotal: _runningTotal,
-                entryType: TapeEntryType.Clear);
+                0m,
+                CalculatorOperation.ClearAll,
+                _mainLedValue,
+                _runningTotal,
+                TapeEntryType.Clear,
+                previousState);
         }
 
         public void Negate()
@@ -232,6 +335,8 @@ namespace BAM.Winforms.Services
 
         public void MemoryAdd()
         {
+            var previousState = CreateStateSnapshot();
+
             decimal valueToStore = GetMemoryCommittableValue();
 
             _memoryLedValue += valueToStore;
@@ -243,13 +348,16 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.MemoryAdd,
                 result: _memoryLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Memory);
+                entryType: TapeEntryType.Memory,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
 
         public void MemorySubtract()
         {
+            var previousState = CreateStateSnapshot();
+
             decimal valueToStore = GetMemoryCommittableValue();
 
             _memoryLedValue -= valueToStore;
@@ -261,7 +369,8 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.MemorySubtract,
                 result: _memoryLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Memory);
+                entryType: TapeEntryType.Memory,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
@@ -269,13 +378,15 @@ namespace BAM.Winforms.Services
         public void MemoryRecall()
         {
             _mainLedValue = _memoryLedValue;
+            var previousState = CreateStateSnapshot();
 
             AddTapeEntry(
                 value: _memoryLedValue,
                 operation: CalculatorOperation.MemoryRecall,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Memory);
+                entryType: TapeEntryType.Memory,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
@@ -283,6 +394,7 @@ namespace BAM.Winforms.Services
         public void MemorySubtotal()
         {
             _mainLedValue = _memoryLedValue;
+            var previousState = CreateStateSnapshot();
 
             StoreLastEntryValue(_memoryLedValue);
 
@@ -291,7 +403,8 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.MemorySubtotal,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Memory);
+                entryType: TapeEntryType.Memory,
+                previousState: previousState);
 
             ClearCurrentInput();
         }
@@ -299,6 +412,7 @@ namespace BAM.Winforms.Services
         public void MemoryTotal()
         {
             _mainLedValue = _memoryLedValue;
+            var previousState = CreateStateSnapshot();
 
             StoreLastEntryValue(_memoryLedValue);
 
@@ -307,7 +421,8 @@ namespace BAM.Winforms.Services
                 operation: CalculatorOperation.MemoryTotal,
                 result: _mainLedValue,
                 runningTotal: _runningTotal,
-                entryType: TapeEntryType.Memory);
+                entryType: TapeEntryType.Memory,
+                previousState: previousState);
 
             _memoryLedValue = 0m;
 
@@ -347,6 +462,7 @@ namespace BAM.Winforms.Services
             decimal result,
             decimal runningTotal,
             TapeEntryType entryType,
+            CalculatorStateSnapshot previousState,
             string comment = null)
         {
             var tapeEntry = new TapeEntry(
@@ -355,9 +471,43 @@ namespace BAM.Winforms.Services
                 result,
                 runningTotal,
                 entryType,
+                previousState,
                 comment);
 
             _tapeEntries.Add(tapeEntry);
+        }
+
+        private CalculatorStateSnapshot CreateStateSnapshot()
+        {
+            return new CalculatorStateSnapshot(
+                _mainLedValue,
+                _memoryLedValue,
+                _runningTotal,
+                _currentInputValue,
+                _hasCurrentInput,
+                _lastRepeatValue,
+                _hasLastRepeatValue,
+                _lastEntryValue,
+                _hasLastEntryValue,
+                _pendingOperation,
+                _pendingValue,
+                _hasPendingOperation);
+        }
+
+        private void RestoreState(CalculatorStateSnapshot snapshot)
+        {
+            _mainLedValue = snapshot.MainLedValue;
+            _memoryLedValue = snapshot.MemoryLedValue;
+            _runningTotal = snapshot.RunningTotal;
+            _currentInputValue = snapshot.CurrentInputValue;
+            _hasCurrentInput = snapshot.HasCurrentInput;
+            _lastRepeatValue = snapshot.LastRepeatValue;
+            _hasLastRepeatValue = snapshot.HasLastRepeatValue;
+            _lastEntryValue = snapshot.LastEntryValue;
+            _hasLastEntryValue = snapshot.HasLastEntryValue;
+            _pendingOperation = snapshot.PendingOperation;
+            _pendingValue = snapshot.PendingValue;
+            _hasPendingOperation = snapshot.HasPendingOperation;
         }
 
         private decimal ResolvePendingOperation(decimal secondValue)

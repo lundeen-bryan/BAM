@@ -57,6 +57,7 @@
     <Compile Include="Handlers\MainForm.Handlers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Models\CalculatorStateSnapshot.cs" />
     <Compile Include="Models\TapeEntry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

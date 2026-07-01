@@ -12,11 +12,13 @@ namespace BAM.Winforms.Models
             decimal result,
             decimal runningTotal,
             TapeEntryType entryType,
+            CalculatorStateSnapshot previousState = null,
             string comment = null)
         {
             Value = value;
             Operation = operation;
             Result = result;
+            PreviousState = previousState;
             RunningTotal = runningTotal;
             EntryType = entryType;
             Comment = comment;
@@ -26,6 +28,7 @@ namespace BAM.Winforms.Models
         public decimal Value { get; }
 
         public CalculatorOperation Operation { get; }
+        public CalculatorStateSnapshot PreviousState { get; }
 
         public decimal Result { get; }
 
