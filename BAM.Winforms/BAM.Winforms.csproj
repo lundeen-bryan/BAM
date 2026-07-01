@@ -54,6 +54,9 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\MainForm.Handlers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Models\TapeEntry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,7 +93,6 @@
   <ItemGroup>
     <Folder Include="Constants\" />
     <Folder Include="Controls\" />
-    <Folder Include="Handlers\" />
     <Folder Include="Helpers\" />
     <Folder Include="Resources\" />
   </ItemGroup>

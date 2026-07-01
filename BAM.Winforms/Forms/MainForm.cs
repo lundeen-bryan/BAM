@@ -1,103 +1,64 @@
 ﻿using System;
 using System.Windows.Forms;
 using BAM.Winforms.Services;
-using BAM.Winforms.Enums;
 
 namespace BAM.Winforms.Forms
 {
     public partial class MainForm : Form
     {
         private readonly ICalculatorEngine _engine;
+
+        private string _currentInputText = "";
+        private bool _isEnteringNumber;
+
         public MainForm()
         {
             InitializeComponent();
-            WireUpEvents();
+
+            this.ShowIcon = false;
+
             _engine = new CalculatorEngine();
+
+            WireUpEvents();
+            UpdateDisplay();
         }
 
         private void WireUpEvents()
         {
-            //TestAddButton.Click += TestAddTenButton_Click;
-        }
+            N0Button.Click += NumberButton_Click;
+            N1Button.Click += NumberButton_Click;
+            N2Button.Click += NumberButton_Click;
+            N3Button.Click += NumberButton_Click;
+            N4Button.Click += NumberButton_Click;
+            N5Button.Click += NumberButton_Click;
+            N6Button.Click += NumberButton_Click;
+            N7Button.Click += NumberButton_Click;
+            N8Button.Click += NumberButton_Click;
+            N9Button.Click += NumberButton_Click;
+            N00Button.Click += NumberButton_Click;
+            NDecimalButton.Click += DecimalButton_Click;
 
-        private void TestAddTenButton_Click(object sender, EventArgs e)
-        {
-            _engine.ClearAll();
+            AddButton.Click += AddButton_Click;
+            SubtractButton.Click += SubtractButton_Click;
+            MultiplyButton.Click += MultiplyButton_Click;
+            DivideButton.Click += DivideButton_Click;
+            EqualsButton.Click += EqualsButton_Click;
 
-            _engine.SetValue(25m);
-            _engine.Add();
+            TButton.Click += TotalButton_Click;
+            STButton.Click += SubtotalButton_Click;
 
-            _engine.SetValue(10m);
-            _engine.Add();
+            MPlusButton.Click += MemoryAddButton_Click;
+            MemorySubtractButton.Click += MemorySubtractButton_Click;
+            MRButton.Click += MemoryRecallButton_Click;
+            MSTButton.Click += MemorySubtotalButton_Click;
+            MTButton.Click += MemoryTotalButton_Click;
 
-            _engine.MemoryAdd();
-            _engine.MemoryAdd();
+            CButton.Click += ClearButton_Click;
+            CAButton.Click += ClearAllButton_Click;
+            DelButton.Click += DeleteButton_Click;
 
-            UpdateDisplay();
-        }
-
-        private void UpdateDisplay()
-        {
-            //TestMainLedTextBox.Text = _engine.MainLedValue.ToString("G29");
-            //TestMemoryLedTextBox.Text = _engine.MemoryLedValue.ToString("G29");
-
-            //TestTapeListBox.Items.Clear();
-
-            //foreach (var entry in _engine.TapeEntries)
-            //{
-            //    TestTapeListBox.Items.Add(
-            //        $"{entry.Value,10:0.00}  {GetTapeSymbol(entry.Operation)}");
-            //}
-        }
-
-        private string GetTapeSymbol(CalculatorOperation operation)
-        {
-            switch (operation)
-            {
-                case CalculatorOperation.Add:
-                    return "+";
-
-                case CalculatorOperation.Subtract:
-                    return "-";
-
-                case CalculatorOperation.Multiply:
-                    return "x";
-
-                case CalculatorOperation.Divide:
-                    return "/";
-
-                case CalculatorOperation.Equals:
-                    return "=";
-
-                case CalculatorOperation.Total:
-                    return "Ttl";
-
-                case CalculatorOperation.Subtotal:
-                    return "Sub";
-
-                case CalculatorOperation.Clear:
-                    return "Clear";
-
-                case CalculatorOperation.ClearAll:
-                    return "ClearAll";
-                case CalculatorOperation.MemoryAdd:
-                    return "M+";
-
-                case CalculatorOperation.MemorySubtract:
-                    return "M-";
-
-                case CalculatorOperation.MemoryRecall:
-                    return "MR";
-
-                case CalculatorOperation.MemorySubtotal:
-                    return "MS";
-
-                case CalculatorOperation.MemoryTotal:
-                    return "MT";
-
-                default:
-                    return operation.ToString();
-            }
+            PercButton.Enabled = false;
+            NegButton.Enabled = false;
         }
     }
 }

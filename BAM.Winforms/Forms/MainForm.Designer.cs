@@ -76,7 +76,7 @@
             this.MPlusButton = new System.Windows.Forms.Button();
             this.MTButton = new System.Windows.Forms.Button();
             this.DelButton = new System.Windows.Forms.Button();
-            this.MinusButton = new System.Windows.Forms.Button();
+            this.MemorySubtractButton = new System.Windows.Forms.Button();
             this.MSTButton = new System.Windows.Forms.Button();
             this.MudButton = new System.Windows.Forms.Button();
             this.Num1TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -603,7 +603,7 @@
             this.MudTableLayoutPanel.Controls.Add(this.MPlusButton, 2, 1);
             this.MudTableLayoutPanel.Controls.Add(this.MTButton, 1, 1);
             this.MudTableLayoutPanel.Controls.Add(this.DelButton, 0, 1);
-            this.MudTableLayoutPanel.Controls.Add(this.MinusButton, 2, 0);
+            this.MudTableLayoutPanel.Controls.Add(this.MemorySubtractButton, 2, 0);
             this.MudTableLayoutPanel.Controls.Add(this.MSTButton, 1, 0);
             this.MudTableLayoutPanel.Controls.Add(this.MudButton, 0, 0);
             this.MudTableLayoutPanel.Location = new System.Drawing.Point(417, 110);
@@ -650,17 +650,17 @@
             this.DelButton.Text = "Del";
             this.DelButton.UseVisualStyleBackColor = false;
             // 
-            // MinusButton
+            // MemorySubtractButton
             // 
-            this.MinusButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.MinusButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MinusButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinusButton.Location = new System.Drawing.Point(135, 3);
-            this.MinusButton.Name = "MinusButton";
-            this.MinusButton.Size = new System.Drawing.Size(62, 44);
-            this.MinusButton.TabIndex = 2;
-            this.MinusButton.Text = "M-=";
-            this.MinusButton.UseVisualStyleBackColor = false;
+            this.MemorySubtractButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.MemorySubtractButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MemorySubtractButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MemorySubtractButton.Location = new System.Drawing.Point(135, 3);
+            this.MemorySubtractButton.Name = "MemorySubtractButton";
+            this.MemorySubtractButton.Size = new System.Drawing.Size(62, 44);
+            this.MemorySubtractButton.TabIndex = 2;
+            this.MemorySubtractButton.Text = "M-=";
+            this.MemorySubtractButton.UseVisualStyleBackColor = false;
             // 
             // MSTButton
             // 
@@ -1150,7 +1150,7 @@
         private System.Windows.Forms.Button MPlusButton;
         private System.Windows.Forms.Button MTButton;
         private System.Windows.Forms.Button DelButton;
-        private System.Windows.Forms.Button MinusButton;
+        private System.Windows.Forms.Button MemorySubtractButton;
         private System.Windows.Forms.Button MSTButton;
         private System.Windows.Forms.Button MudButton;
         private System.Windows.Forms.TableLayoutPanel Num1TableLayoutPanel;
