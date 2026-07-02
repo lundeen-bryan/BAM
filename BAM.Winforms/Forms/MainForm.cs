@@ -19,8 +19,11 @@ namespace BAM.Winforms.Forms
 
             _engine = new CalculatorEngine();
 
+
             WireUpEvents();
             UpdateDisplay();
+            WireUpHelpStatusMessages();
+            this.ActiveControl = MainTextBox;
         }
 
         private void WireUpEvents()
@@ -56,9 +59,6 @@ namespace BAM.Winforms.Forms
             CButton.Click += ClearButton_Click;
             CAButton.Click += ClearAllButton_Click;
             DelButton.Click += DeleteButton_Click;
-
-            PercButton.Enabled = false;
-            NegButton.Enabled = false;
         }
     }
 }
