@@ -9,14 +9,15 @@ namespace BAM.Winforms.Forms
     {
         private void NumberButton_Click(object sender, EventArgs e)
         {
-            var button = sender as Button;
-
-            if (button == null)
+            if (sender is Button button)
             {
-                return;
+                AppendNumber(button.Text);
             }
+        }
 
-            AppendInput(button.Text);
+        private void AppendNumber(string numberText)
+        {
+            AppendInput(numberText);
         }
 
         private void DecimalButton_Click(object sender, EventArgs e)

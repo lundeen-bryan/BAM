@@ -19,10 +19,10 @@ namespace BAM.Winforms.Forms
 
             _engine = new CalculatorEngine();
 
-
             WireUpEvents();
             UpdateDisplay();
             WireUpHelpStatusMessages();
+
             this.ActiveControl = MainTextBox;
         }
 
@@ -60,5 +60,47 @@ namespace BAM.Winforms.Forms
             CAButton.Click += ClearAllButton_Click;
             DelButton.Click += DeleteButton_Click;
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Top row numbers
+            if (keyData >= Keys.D0 && keyData <= Keys.D9)
+            {
+                AppendNumber((keyData - Keys.D0).ToString());
+                return true;
+            }
+
+            // Numpad numbers
+            if (keyData >= Keys.NumPad0 && keyData <= Keys.NumPad9)
+            {
+                AppendNumber((keyData - Keys.NumPad0).ToString());
+                return true;
+            }
+
+            switch (keyData)
+            {
+                case Keys.Add:
+                case Keys.Oemplus:
+                    AddButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                case Keys.Subtract:
+                case Keys.OemMinus:
+                    SubtractButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                case Keys.Multiply:
+                    MultiplyButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                case Keys.Divide:
+                case Keys.OemQuestion:
+                    DivideButton_Click(this, EventArgs.Empty);
+                    return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }
