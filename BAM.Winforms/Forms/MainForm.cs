@@ -97,6 +97,14 @@ namespace BAM.Winforms.Forms
                 case Keys.OemQuestion:
                     DivideButton_Click(this, EventArgs.Empty);
                     return true;
+
+                case Keys.S:
+                    SubtotalButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                case Keys.T:
+                    TotalButton_Click(this, EventArgs.Empty);
+                    return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
