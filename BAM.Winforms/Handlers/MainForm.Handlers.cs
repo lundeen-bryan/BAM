@@ -248,6 +248,12 @@ namespace BAM.Winforms.Forms
                 case CalculatorOperation.ClearAll:
                     return "CA";
 
+                case CalculatorOperation.Percent:
+                    return "%";
+
+                case CalculatorOperation.None:
+                    return "";
+
                 default:
                     return operation.ToString();
             }

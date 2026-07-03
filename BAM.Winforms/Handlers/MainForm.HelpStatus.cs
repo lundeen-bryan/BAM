@@ -24,7 +24,7 @@ namespace BAM.Winforms.Forms
                 NDecimalButton);
 
             AttachHelpStatusMessage(
-                "Subtotal Button (Displays the current running total without clearing it.)",
+                "Subtotal Button (Displays the current running total without clearing it.) Shortcut: s, S",
                 STButton);
 
             AttachHelpStatusMessage(
@@ -32,15 +32,15 @@ namespace BAM.Winforms.Forms
                 PercButton);
 
             AttachHelpStatusMessage(
-                "Divide Button (Divides the current running total by the immediate value.)",
+                "Divide Button (Divides the current running total by the immediate value.) Shortcut: /",
                 DivideButton);
 
             AttachHelpStatusMessage(
-                "Multiply Button (Multiplies the current running total by the immediate value.)",
+                "Multiply Button (Multiplies the current running total by the immediate value.) Shortcut: *, x, X",
                 MultiplyButton);
 
             AttachHelpStatusMessage(
-                "Equals Button (Displays result of multiplication or division. Does not modify current running total.)",
+                "Equals Button (Displays result of multiply or divide. Does not modify current running ttl.) Short: Ctrl+Enter",
                 EqualsButton);
 
             AttachHelpStatusMessage(
@@ -100,7 +100,7 @@ namespace BAM.Winforms.Forms
                 M0Button, M1Button, M2Button, M3Button);
 
             AttachHelpStatusMessage(
-                "Total Button (Displays the current running total and clears Main LED.)",
+                "Total Button (Displays the current running total and clears it) Shortcut: t, T, Enter",
                 TButton);
 
             AttachHelpStatusMessage(

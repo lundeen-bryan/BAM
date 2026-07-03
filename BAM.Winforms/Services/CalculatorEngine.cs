@@ -220,7 +220,7 @@ namespace BAM.Winforms.Services
 
             var previousState = CreateStateSnapshot();
 
-            _pendingValue = GetCommittableValue();
+            decimal firstValue = _pendingValue;
             decimal secondValue = GetCommittableValue();
             decimal result = ResolvePendingOperation(secondValue);
 
@@ -228,9 +228,26 @@ namespace BAM.Winforms.Services
 
             StoreLastEntryValue(result);
 
+            // Tape logging needs firstValue + pending operation + secondValue + result
+            //AddTapeEntry(
+            //    value: firstValue,
+            //    operation: _pendingOperation,
+            //    result: firstValue,
+            //    runningTotal: _runningTotal,
+            //    entryType: TapeEntryType.Operation,
+            //    previousState: previousState);
+
             AddTapeEntry(
                 value: secondValue,
                 operation: CalculatorOperation.Equals,
+                result: secondValue,
+                runningTotal: _runningTotal,
+                entryType: TapeEntryType.Result,
+                previousState: previousState);
+
+            AddTapeEntry(
+                value: result,
+                operation: CalculatorOperation.None,
                 result: result,
                 runningTotal: _runningTotal,
                 entryType: TapeEntryType.Result,

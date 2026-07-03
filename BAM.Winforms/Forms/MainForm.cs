@@ -93,6 +93,11 @@ namespace BAM.Winforms.Forms
                     MultiplyButton_Click(this, EventArgs.Empty);
                     return true;
 
+                case Keys.X:
+                case Keys.Shift | Keys.D8: // Shift + 8 is *
+                    MultiplyButton_Click(this, EventArgs.Empty);
+                    return true;
+
                 case Keys.Divide:
                 case Keys.OemQuestion:
                     DivideButton_Click(this, EventArgs.Empty);
@@ -104,6 +109,19 @@ namespace BAM.Winforms.Forms
 
                 case Keys.T:
                     TotalButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                case Keys.Enter:
+                    TotalButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                case Keys.OemPeriod:
+                    DecimalButton_Click(this, EventArgs.Empty);
+                    return true;
+
+                // Equals button is Ctrl + Enter
+                case Keys.Control | Keys.Enter:
+                    EqualsButton_Click(this, EventArgs.Empty);
                     return true;
             }
 

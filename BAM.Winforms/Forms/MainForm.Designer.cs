@@ -108,6 +108,19 @@
             this.MainLedLabel = new System.Windows.Forms.Label();
             this.MemoryTextBox = new System.Windows.Forms.TextBox();
             this.MainTextBox = new System.Windows.Forms.TextBox();
+            this.RoundingGroupBox = new System.Windows.Forms.GroupBox();
+            this.UpRadioButton = new System.Windows.Forms.RadioButton();
+            this.OffRadioButton = new System.Windows.Forms.RadioButton();
+            this.DownRadioButton = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.FiveRadioButton = new System.Windows.Forms.RadioButton();
+            this.FourRadioButton = new System.Windows.Forms.RadioButton();
+            this.ThreeRadioButton = new System.Windows.Forms.RadioButton();
+            this.AutoDecimalModeCheckBox = new System.Windows.Forms.CheckBox();
+            this.TwoRadioButton = new System.Windows.Forms.RadioButton();
+            this.OneRadioButton = new System.Windows.Forms.RadioButton();
+            this.ZeroRadioButton = new System.Windows.Forms.RadioButton();
+            this.FloatRadioButton = new System.Windows.Forms.RadioButton();
             this.MainMenuStrip.SuspendLayout();
             this.MainToolStrip.SuspendLayout();
             this.MainPanel.SuspendLayout();
@@ -122,6 +135,8 @@
             this.NegTableLayoutPanel.SuspendLayout();
             this.MacroTableLayoutPanel.SuspendLayout();
             this.LedTableLayoutPanel.SuspendLayout();
+            this.RoundingGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenuStrip
@@ -139,7 +154,7 @@
             this.helpToolStripMenuItem});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(835, 25);
+            this.MainMenuStrip.Size = new System.Drawing.Size(624, 25);
             this.MainMenuStrip.TabIndex = 0;
             this.MainMenuStrip.Text = "Main";
             // 
@@ -212,7 +227,7 @@
             this.toolStripSeparator3});
             this.MainToolStrip.Location = new System.Drawing.Point(0, 25);
             this.MainToolStrip.Name = "MainToolStrip";
-            this.MainToolStrip.Size = new System.Drawing.Size(835, 38);
+            this.MainToolStrip.Size = new System.Drawing.Size(624, 38);
             this.MainToolStrip.TabIndex = 1;
             this.MainToolStrip.Text = "Main";
             // 
@@ -331,11 +346,13 @@
             this.MainPanel.Location = new System.Drawing.Point(0, 63);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.MainPanel.Size = new System.Drawing.Size(835, 592);
+            this.MainPanel.Size = new System.Drawing.Size(624, 592);
             this.MainPanel.TabIndex = 2;
             // 
             // MainGroupBox
             // 
+            this.MainGroupBox.Controls.Add(this.groupBox1);
+            this.MainGroupBox.Controls.Add(this.RoundingGroupBox);
             this.MainGroupBox.Controls.Add(this.HelpStatusStrip);
             this.MainGroupBox.Controls.Add(this.TapePanel);
             this.MainGroupBox.Controls.Add(this.tableLayoutPanel2);
@@ -350,7 +367,7 @@
             this.MainGroupBox.Location = new System.Drawing.Point(6, 6);
             this.MainGroupBox.Name = "MainGroupBox";
             this.MainGroupBox.Padding = new System.Windows.Forms.Padding(6);
-            this.MainGroupBox.Size = new System.Drawing.Size(823, 580);
+            this.MainGroupBox.Size = new System.Drawing.Size(612, 580);
             this.MainGroupBox.TabIndex = 0;
             this.MainGroupBox.TabStop = false;
             this.MainGroupBox.Text = "Bryan\'s Adding Machine - BAM";
@@ -362,7 +379,7 @@
             this.HelpToolStripStatusLabel});
             this.HelpStatusStrip.Location = new System.Drawing.Point(6, 552);
             this.HelpStatusStrip.Name = "HelpStatusStrip";
-            this.HelpStatusStrip.Size = new System.Drawing.Size(811, 22);
+            this.HelpStatusStrip.Size = new System.Drawing.Size(600, 22);
             this.HelpStatusStrip.SizingGrip = false;
             this.HelpStatusStrip.TabIndex = 9;
             this.HelpStatusStrip.Text = "Help";
@@ -371,10 +388,10 @@
             // 
             this.HelpToolStripStatusLabel.BackColor = System.Drawing.Color.MintCream;
             this.HelpToolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.HelpToolStripStatusLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpToolStripStatusLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HelpToolStripStatusLabel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.HelpToolStripStatusLabel.Name = "HelpToolStripStatusLabel";
-            this.HelpToolStripStatusLabel.Size = new System.Drawing.Size(796, 17);
+            this.HelpToolStripStatusLabel.Size = new System.Drawing.Size(554, 17);
             this.HelpToolStripStatusLabel.Spring = true;
             this.HelpToolStripStatusLabel.Text = "Status Messages Here";
             this.HelpToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -382,9 +399,9 @@
             // TapePanel
             // 
             this.TapePanel.Controls.Add(this.TapeListBox);
-            this.TapePanel.Location = new System.Drawing.Point(10, 216);
+            this.TapePanel.Location = new System.Drawing.Point(9, 251);
             this.TapePanel.Name = "TapePanel";
-            this.TapePanel.Size = new System.Drawing.Size(604, 333);
+            this.TapePanel.Size = new System.Drawing.Size(414, 298);
             this.TapePanel.TabIndex = 8;
             // 
             // TapeListBox
@@ -396,7 +413,7 @@
             this.TapeListBox.Location = new System.Drawing.Point(0, 0);
             this.TapeListBox.Name = "TapeListBox";
             this.TapeListBox.ScrollAlwaysVisible = true;
-            this.TapeListBox.Size = new System.Drawing.Size(604, 333);
+            this.TapeListBox.Size = new System.Drawing.Size(414, 298);
             this.TapeListBox.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -412,7 +429,7 @@
             this.tableLayoutPanel2.Controls.Add(this.PoundButton, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.MultiplyButton, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.EqualsButton, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(705, 282);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(488, 382);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -527,7 +544,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.AddButton, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(646, 282);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(430, 382);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -561,7 +578,7 @@
             this.Num2TableLayoutPanel.Controls.Add(this.N3Button, 2, 0);
             this.Num2TableLayoutPanel.Controls.Add(this.N2Button, 1, 0);
             this.Num2TableLayoutPanel.Controls.Add(this.N1Button, 0, 0);
-            this.Num2TableLayoutPanel.Location = new System.Drawing.Point(647, 194);
+            this.Num2TableLayoutPanel.Location = new System.Drawing.Point(430, 294);
             this.Num2TableLayoutPanel.Name = "Num2TableLayoutPanel";
             this.Num2TableLayoutPanel.RowCount = 2;
             this.Num2TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -659,7 +676,7 @@
             this.Num1TableLayoutPanel.Controls.Add(this.N9Button, 2, 0);
             this.Num1TableLayoutPanel.Controls.Add(this.N8Button, 1, 0);
             this.Num1TableLayoutPanel.Controls.Add(this.N7Button, 0, 0);
-            this.Num1TableLayoutPanel.Location = new System.Drawing.Point(647, 109);
+            this.Num1TableLayoutPanel.Location = new System.Drawing.Point(430, 206);
             this.Num1TableLayoutPanel.Name = "Num1TableLayoutPanel";
             this.Num1TableLayoutPanel.RowCount = 2;
             this.Num1TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -757,7 +774,7 @@
             this.MudTableLayoutPanel.Controls.Add(this.MemorySubtractButton, 2, 0);
             this.MudTableLayoutPanel.Controls.Add(this.MSTButton, 1, 0);
             this.MudTableLayoutPanel.Controls.Add(this.MudButton, 0, 0);
-            this.MudTableLayoutPanel.Location = new System.Drawing.Point(433, 110);
+            this.MudTableLayoutPanel.Location = new System.Drawing.Point(430, 100);
             this.MudTableLayoutPanel.Name = "MudTableLayoutPanel";
             this.MudTableLayoutPanel.RowCount = 2;
             this.MudTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -849,7 +866,7 @@
             this.NegTableLayoutPanel.Controls.Add(this.CButton, 2, 0);
             this.NegTableLayoutPanel.Controls.Add(this.CaretButton, 1, 0);
             this.NegTableLayoutPanel.Controls.Add(this.NegButton, 0, 0);
-            this.NegTableLayoutPanel.Location = new System.Drawing.Point(220, 110);
+            this.NegTableLayoutPanel.Location = new System.Drawing.Point(218, 100);
             this.NegTableLayoutPanel.Name = "NegTableLayoutPanel";
             this.NegTableLayoutPanel.RowCount = 2;
             this.NegTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -935,7 +952,7 @@
             this.MacroTableLayoutPanel.Controls.Add(this.VButton, 2, 0);
             this.MacroTableLayoutPanel.Controls.Add(this.M1Button, 1, 0);
             this.MacroTableLayoutPanel.Controls.Add(this.M0Button, 0, 0);
-            this.MacroTableLayoutPanel.Location = new System.Drawing.Point(7, 110);
+            this.MacroTableLayoutPanel.Location = new System.Drawing.Point(6, 100);
             this.MacroTableLayoutPanel.Name = "MacroTableLayoutPanel";
             this.MacroTableLayoutPanel.RowCount = 2;
             this.MacroTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -1019,9 +1036,9 @@
             // 
             this.LedTableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
             this.LedTableLayoutPanel.ColumnCount = 3;
-            this.LedTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.42593F));
-            this.LedTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.57407F));
-            this.LedTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 386F));
+            this.LedTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.81328F));
+            this.LedTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.37344F));
+            this.LedTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.81328F));
             this.LedTableLayoutPanel.Controls.Add(this.MemoryLedLabel, 0, 0);
             this.LedTableLayoutPanel.Controls.Add(this.MainLedLabel, 2, 0);
             this.LedTableLayoutPanel.Controls.Add(this.MemoryTextBox, 0, 1);
@@ -1031,9 +1048,9 @@
             this.LedTableLayoutPanel.Name = "LedTableLayoutPanel";
             this.LedTableLayoutPanel.Padding = new System.Windows.Forms.Padding(6);
             this.LedTableLayoutPanel.RowCount = 2;
-            this.LedTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.LedTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.LedTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.LedTableLayoutPanel.Size = new System.Drawing.Size(811, 73);
+            this.LedTableLayoutPanel.Size = new System.Drawing.Size(600, 65);
             this.LedTableLayoutPanel.TabIndex = 0;
             // 
             // MemoryLedLabel
@@ -1041,16 +1058,16 @@
             this.MemoryLedLabel.AutoSize = true;
             this.MemoryLedLabel.Location = new System.Drawing.Point(9, 6);
             this.MemoryLedLabel.Name = "MemoryLedLabel";
-            this.MemoryLedLabel.Size = new System.Drawing.Size(119, 23);
+            this.MemoryLedLabel.Size = new System.Drawing.Size(119, 20);
             this.MemoryLedLabel.TabIndex = 0;
             this.MemoryLedLabel.Text = "Memory LED:";
             // 
             // MainLedLabel
             // 
             this.MainLedLabel.AutoSize = true;
-            this.MainLedLabel.Location = new System.Drawing.Point(421, 6);
+            this.MainLedLabel.Location = new System.Drawing.Point(332, 6);
             this.MainLedLabel.Name = "MainLedLabel";
-            this.MainLedLabel.Size = new System.Drawing.Size(89, 23);
+            this.MainLedLabel.Size = new System.Drawing.Size(89, 20);
             this.MainLedLabel.TabIndex = 1;
             this.MainLedLabel.Text = "Main LED:";
             // 
@@ -1058,10 +1075,10 @@
             // 
             this.MemoryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MemoryTextBox.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MemoryTextBox.Location = new System.Drawing.Point(9, 34);
+            this.MemoryTextBox.Location = new System.Drawing.Point(9, 29);
             this.MemoryTextBox.Name = "MemoryTextBox";
             this.MemoryTextBox.ReadOnly = true;
-            this.MemoryTextBox.Size = new System.Drawing.Size(352, 32);
+            this.MemoryTextBox.Size = new System.Drawing.Size(257, 32);
             this.MemoryTextBox.TabIndex = 2;
             this.MemoryTextBox.Text = "0.";
             this.MemoryTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1070,20 +1087,199 @@
             // 
             this.MainTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MainTextBox.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainTextBox.Location = new System.Drawing.Point(421, 34);
+            this.MainTextBox.Location = new System.Drawing.Point(332, 29);
             this.MainTextBox.Name = "MainTextBox";
             this.MainTextBox.ReadOnly = true;
-            this.MainTextBox.Size = new System.Drawing.Size(352, 32);
+            this.MainTextBox.Size = new System.Drawing.Size(259, 32);
             this.MainTextBox.TabIndex = 3;
             this.MainTextBox.Text = "0.";
             this.MainTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // RoundingGroupBox
+            // 
+            this.RoundingGroupBox.Controls.Add(this.DownRadioButton);
+            this.RoundingGroupBox.Controls.Add(this.OffRadioButton);
+            this.RoundingGroupBox.Controls.Add(this.UpRadioButton);
+            this.RoundingGroupBox.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RoundingGroupBox.Location = new System.Drawing.Point(9, 188);
+            this.RoundingGroupBox.Name = "RoundingGroupBox";
+            this.RoundingGroupBox.Size = new System.Drawing.Size(108, 59);
+            this.RoundingGroupBox.TabIndex = 10;
+            this.RoundingGroupBox.TabStop = false;
+            this.RoundingGroupBox.Text = "Round";
+            // 
+            // UpRadioButton
+            // 
+            this.UpRadioButton.AutoSize = true;
+            this.UpRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.UpRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UpRadioButton.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpRadioButton.Location = new System.Drawing.Point(6, 20);
+            this.UpRadioButton.Name = "UpRadioButton";
+            this.UpRadioButton.Size = new System.Drawing.Size(27, 31);
+            this.UpRadioButton.TabIndex = 11;
+            this.UpRadioButton.Text = "Up";
+            this.UpRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // OffRadioButton
+            // 
+            this.OffRadioButton.AutoSize = true;
+            this.OffRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.OffRadioButton.Checked = true;
+            this.OffRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OffRadioButton.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OffRadioButton.Location = new System.Drawing.Point(33, 20);
+            this.OffRadioButton.Name = "OffRadioButton";
+            this.OffRadioButton.Size = new System.Drawing.Size(28, 31);
+            this.OffRadioButton.TabIndex = 12;
+            this.OffRadioButton.TabStop = true;
+            this.OffRadioButton.Text = "Off";
+            this.OffRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // DownRadioButton
+            // 
+            this.DownRadioButton.AutoSize = true;
+            this.DownRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.DownRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DownRadioButton.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownRadioButton.Location = new System.Drawing.Point(61, 20);
+            this.DownRadioButton.Name = "DownRadioButton";
+            this.DownRadioButton.Size = new System.Drawing.Size(43, 31);
+            this.DownRadioButton.TabIndex = 13;
+            this.DownRadioButton.Text = "Down";
+            this.DownRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.FloatRadioButton);
+            this.groupBox1.Controls.Add(this.TwoRadioButton);
+            this.groupBox1.Controls.Add(this.OneRadioButton);
+            this.groupBox1.Controls.Add(this.ZeroRadioButton);
+            this.groupBox1.Controls.Add(this.AutoDecimalModeCheckBox);
+            this.groupBox1.Controls.Add(this.FiveRadioButton);
+            this.groupBox1.Controls.Add(this.FourRadioButton);
+            this.groupBox1.Controls.Add(this.ThreeRadioButton);
+            this.groupBox1.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(175, 188);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(192, 59);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Decimal Precision";
+            // 
+            // FiveRadioButton
+            // 
+            this.FiveRadioButton.AutoSize = true;
+            this.FiveRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.FiveRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FiveRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FiveRadioButton.Location = new System.Drawing.Point(166, 20);
+            this.FiveRadioButton.Name = "FiveRadioButton";
+            this.FiveRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.FiveRadioButton.TabIndex = 13;
+            this.FiveRadioButton.Text = "5";
+            this.FiveRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // FourRadioButton
+            // 
+            this.FourRadioButton.AutoSize = true;
+            this.FourRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.FourRadioButton.Checked = true;
+            this.FourRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FourRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FourRadioButton.Location = new System.Drawing.Point(142, 20);
+            this.FourRadioButton.Name = "FourRadioButton";
+            this.FourRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.FourRadioButton.TabIndex = 12;
+            this.FourRadioButton.TabStop = true;
+            this.FourRadioButton.Text = "4";
+            this.FourRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ThreeRadioButton
+            // 
+            this.ThreeRadioButton.AutoSize = true;
+            this.ThreeRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ThreeRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ThreeRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ThreeRadioButton.Location = new System.Drawing.Point(119, 20);
+            this.ThreeRadioButton.Name = "ThreeRadioButton";
+            this.ThreeRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.ThreeRadioButton.TabIndex = 11;
+            this.ThreeRadioButton.Text = "3";
+            this.ThreeRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // AutoDecimalModeCheckBox
+            // 
+            this.AutoDecimalModeCheckBox.AutoSize = true;
+            this.AutoDecimalModeCheckBox.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.AutoDecimalModeCheckBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutoDecimalModeCheckBox.Location = new System.Drawing.Point(6, 20);
+            this.AutoDecimalModeCheckBox.Name = "AutoDecimalModeCheckBox";
+            this.AutoDecimalModeCheckBox.Size = new System.Drawing.Size(18, 33);
+            this.AutoDecimalModeCheckBox.TabIndex = 14;
+            this.AutoDecimalModeCheckBox.Text = "A";
+            this.AutoDecimalModeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // TwoRadioButton
+            // 
+            this.TwoRadioButton.AutoSize = true;
+            this.TwoRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TwoRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TwoRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TwoRadioButton.Location = new System.Drawing.Point(96, 20);
+            this.TwoRadioButton.Name = "TwoRadioButton";
+            this.TwoRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.TwoRadioButton.TabIndex = 17;
+            this.TwoRadioButton.Text = "2";
+            this.TwoRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // OneRadioButton
+            // 
+            this.OneRadioButton.AutoSize = true;
+            this.OneRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.OneRadioButton.Checked = true;
+            this.OneRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OneRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OneRadioButton.Location = new System.Drawing.Point(72, 20);
+            this.OneRadioButton.Name = "OneRadioButton";
+            this.OneRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.OneRadioButton.TabIndex = 16;
+            this.OneRadioButton.TabStop = true;
+            this.OneRadioButton.Text = "1";
+            this.OneRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ZeroRadioButton
+            // 
+            this.ZeroRadioButton.AutoSize = true;
+            this.ZeroRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ZeroRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ZeroRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ZeroRadioButton.Location = new System.Drawing.Point(49, 20);
+            this.ZeroRadioButton.Name = "ZeroRadioButton";
+            this.ZeroRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.ZeroRadioButton.TabIndex = 15;
+            this.ZeroRadioButton.Text = "0";
+            this.ZeroRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // FloatRadioButton
+            // 
+            this.FloatRadioButton.AutoSize = true;
+            this.FloatRadioButton.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.FloatRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FloatRadioButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FloatRadioButton.Location = new System.Drawing.Point(30, 20);
+            this.FloatRadioButton.Name = "FloatRadioButton";
+            this.FloatRadioButton.Size = new System.Drawing.Size(18, 31);
+            this.FloatRadioButton.TabIndex = 18;
+            this.FloatRadioButton.Text = "F";
+            this.FloatRadioButton.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(835, 655);
+            this.ClientSize = new System.Drawing.Size(624, 655);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainToolStrip);
             this.Controls.Add(this.MainMenuStrip);
@@ -1112,6 +1308,10 @@
             this.MacroTableLayoutPanel.ResumeLayout(false);
             this.LedTableLayoutPanel.ResumeLayout(false);
             this.LedTableLayoutPanel.PerformLayout();
+            this.RoundingGroupBox.ResumeLayout(false);
+            this.RoundingGroupBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1198,5 +1398,18 @@
         private System.Windows.Forms.Button PercButton;
         private System.Windows.Forms.Button DivideButton;
         private System.Windows.Forms.ToolStripStatusLabel HelpToolStripStatusLabel;
+        private System.Windows.Forms.GroupBox RoundingGroupBox;
+        private System.Windows.Forms.RadioButton UpRadioButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton FiveRadioButton;
+        private System.Windows.Forms.RadioButton FourRadioButton;
+        private System.Windows.Forms.RadioButton ThreeRadioButton;
+        private System.Windows.Forms.RadioButton DownRadioButton;
+        private System.Windows.Forms.RadioButton OffRadioButton;
+        private System.Windows.Forms.CheckBox AutoDecimalModeCheckBox;
+        private System.Windows.Forms.RadioButton FloatRadioButton;
+        private System.Windows.Forms.RadioButton TwoRadioButton;
+        private System.Windows.Forms.RadioButton OneRadioButton;
+        private System.Windows.Forms.RadioButton ZeroRadioButton;
     }
 }
