@@ -61,6 +61,14 @@ namespace BAM.Winforms.Forms
             DelButton.Click += DeleteButton_Click;
         }
 
+        /// <summary>
+        /// When user presses a key, this method will be called to handle the
+        /// key press event. It checks if the key pressed is a number or an
+        /// operator and calls the appropriate method to handle the input.
+        /// </summary>
+        /// <param name="msg">The message to process.</param>
+        /// <param name="keyData">The key data to process.</param>
+        /// <returns>True if the key was handled; otherwise, false.</returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // Top row numbers

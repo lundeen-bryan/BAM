@@ -147,6 +147,35 @@ namespace BAM.Winforms.Forms
             AttachToolStripStatusMessage(
                 "Edit Button (Edits the current document.)",
                 EditToolStripButton);
+
+            AttachToolStripStatusMessage(
+                "Copy to clipboard in ASCII spreadsheet format.",
+                CopyToolStripButton);
+
+            AttachToolStripStatusMessage(
+                "Add or edit a comment to the selected line.",
+                CommentToolStripButton);
+
+            AttachToolStripStatusMessage(
+                "Print preview, display in a page format.",
+                DisplayPageToolStripButton);
+
+            AttachHelpStatusMessage(
+                "Rounding Radio Buttons",
+                UpRadioButton, DownRadioButton, OffRadioButton);
+
+            AttachHelpStatusMessage(
+                "Decimal Places Buttons",
+                ZeroRadioButton, OneRadioButton, TwoRadioButton, ThreeRadioButton, FourRadioButton, FiveRadioButton);
+
+            AttachHelpStatusMessage(
+                "Auto Decimal Mode sets the decimal format to 2 places from the right",
+                AutoDecimalModeCheckBox);
+
+            AttachHelpStatusMessage(
+                "Floating Precision Mode, displays results with minimal rounding and additional decimal detail",
+                FloatRadioButton);
+
         }
 
         private void AttachToolStripStatusMessage(string message, ToolStripButton toolStripButton)
